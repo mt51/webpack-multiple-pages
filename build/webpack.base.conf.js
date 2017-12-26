@@ -1,12 +1,10 @@
 const path = require('path')
 const entriesConfig = require('../config')
-const entries = {}
+let entries = {}
 
 entriesConfig.forEach(item => {
   entries[item.entryName] = item.entry
 })
-
-entries.vendor = ['vue']
 
 module.exports = {
   entry: entries,
