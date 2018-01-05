@@ -182,13 +182,19 @@ entriesConfig.forEach(item => {
 
 差不多就是这些。
 
-### 不足的部分
+### 使用
+1. 使用单文件组件
 
-没有考虑子页面，比如在news文件夹中还有子文件夹构成的子页面，这里暂时没有处理，后面会加上。
+在每个页面文件夹下新增一个.vue的根组件，然后在入口文件中导入根组件，然后实例化Vue对象挂载等。
+
+2.不使用单文件组件
+直接在入口文件中实例化Vue对象。
+
+
 
 代码地址：[https://github.com/lzy1043/webpack-multiple-pages](https://github.com/lzy1043/webpack-multiple-pages)。
 
 
-  [1]: /img/bV01fH
-  [2]: /img/bV008L
-  [3]: /img/bV01fR
+  [1]: https://sfault-image.b0.upaiyun.com/377/728/3777288807-5a4271a2edeae_articlex
+  [2]: https://sfault-image.b0.upaiyun.com/663/252/663252518-5a426746d71aa_articlex
+  [3]: https://sfault-image.b0.upaiyun.com/135/026/1350269367-5a427223027f8_articlex
