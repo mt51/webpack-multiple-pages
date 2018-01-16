@@ -1,14 +1,14 @@
 <template>
   <div class="index">
-    <TopHeader></TopHeader>
+    <Hello />
   </div>
 </template>
 
 <script>
-  import Header from '@/components/header'
-  export default {
-    components: {
-      'TopHeader': Header
-    }
+import Hello from '@/components/HelloWorld'
+export default {
+  components: {
+    Hello
   }
+}
 </script>
