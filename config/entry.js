@@ -2,17 +2,12 @@ const path = require('path')
 const fs = require('fs')
 const baseDir = path.resolve(__dirname, '../src/views')
 
-const excludeDir = ['index']
+const excludeDir = []
 const viewArr = fs.readdirSync(baseDir).filter(dir => {
   return excludeDir.indexOf(dir) === -1 && fs.statSync(baseDir + '/' + dir).isDirectory()
 })
 
-let entriesConfig = [{
-  entryName: 'index',
-  entry: path.resolve(baseDir, 'index/index.js'),
-  filename: 'index.html',
-  template: path.resolve(__dirname, '../index.html')
-}]
+let entriesConfig = []
 
 viewArr.forEach(generateEntryConfig)
 
@@ -27,14 +22,5 @@ function generateEntryConfig (dir) {
   })
   const dirPath = path.resolve(baseDir, dir)
   const files = fs.readdirSync(dirPath);
-
-  const subDirs = files.filter(sub => {
-    return fs.statSync(dirPath + '/' + sub).isDirectory()
-  }).map(dirName => {
-    return dir + '/' + dirName
-  })
-  if (subDirs.length > 0) {
-    subDirs.forEach(generateEntryConfig)
-  }
 }
 module.exports = entriesConfig
