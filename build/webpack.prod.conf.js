@@ -11,6 +11,10 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const entriesConfig = require('../config/entry')
+let entries = []
+entriesConfig.forEach(item => {
+  entries.push(item.entryName)
+})
 
 const env = require('../config/prod.env')
 
@@ -86,10 +90,10 @@ const webpackConfig = merge(baseWebpackConfig, {
     // in a separate chunk, similar to the vendor chunk
     // see: https://webpack.js.org/plugins/commons-chunk-plugin/#extra-async-commons-chunk
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'app',
-      async: 'vendor-async',
-      children: true,
-      minChunks: 3
+      name: 'commons',
+      filename: 'js/commons.[chunkhash].js',
+      chunks: entries,
+      minChunks: 2
     }),
 
     // copy custom static assets
@@ -135,7 +139,8 @@ entriesConfig.forEach(item => {
       collapseWhitespace: true,
       removeAttributeQuotes: true
     },
-    chunks: ['vendor', 'manifest', item.entryName]
+    chunks: ['manifest', 'vendor', 'commons', item.entryName],
+    chunksSortMode: 'manual'
   }
   webpackConfig.plugins.push(new HtmlWebpackPlugin(option))
 })
